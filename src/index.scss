@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tulpen+One&display=swap");
+html {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  font-family: "Oswald", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  transition: background 1s ease-in-out;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.background {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.location-info {
+  font-size: 20px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  transform: translate(-50%, -50%);
+  div {
+    animation: forecastInfoEntrance 1000ms;
+  }
+  button {
+    margin-right: 5px;
+  }
+}
+
+.today-info {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+
+  justify-content: center;
+  align-items: center;
+  .today-degree {
+    font-size: 170px;
+    font-family: "Tulpen One";
+    margin-right: 50px;
+    display: inline-block;
+    animation: forecastIconEntrance 1000ms;
+  }
+
+  .today-weather-icon {
+    svg {
+      height: 100px;
+      width: 100px;
+      animation: forecastIconEntrance 1000ms;
+      path,
+      circle {
+        fill: white;
+      }
+    }
+  }
+  .today-weather {
+    font-size: 20px;
+    animation: forecastInfoEntrance 1000ms;
+    text-transform: capitalize;
+    text-align: center;
+  }
+}
+.forecasts {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  p {
+    animation: forecastEntrance 1200ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-transform: capitalize;
+    button {
+      margin-left: 5px;
+    }
+  }
+  path,
+  circle {
+    fill: white;
+  }
+}
+.forecast {
+  width: 95px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.3);
+  // margin: 10px;
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(7px);
+  animation: forecastEntrance;
+  overflow: hidden;
+  svg {
+    visibility: hidden;
+    height: 50px;
+    width: 50px;
+    margin: 10px 0;
+  }
+  div {
+    visibility: hidden;
+  }
+  .forecast-temp {
+    font-family: "Tulpen One";
+    font-size: 30px;
+  }
+}
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  backdrop-filter: blur(7px);
+  cursor: pointer;
+}
+.search-wrap {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // display: flex;
+  width: 500px;
+  button {
+    width: 60px;
+    font-size: 25px;
+    margin-left: 5px;
+    animation: forecastEntrance 500ms;
+  }
+  label {
+    font-size: 13px;
+    text-align: center;
+    display: block;
+    opacity: 0;
+  }
+}
+.input-wrap {
+  position: relative;
+  width: 100%;
+  animation: forecastEntrance 500ms;
+  svg {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 25px;
+    font-size: 25px;
+    transform: translate(-50%, -50%);
+  }
+  input {
+    width: 100%;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    backdrop-filter: blur(7px);
+    border: none;
+    padding-left: 50px;
+    outline: none;
+    border-radius: 5px;
+    font-family: "Oswald", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    font-size: 25px;
+    text-transform: uppercase !important;
+  }
+}
+@keyframes forecastEntrance {
+  0% {
+    transform: translate3d(0, -50%, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.reveal-info {
+  visibility: visible !important;
+  animation: forecastInfoEntrance 1000ms;
+}
+.hide-info {
+  visibility: visible !important;
+  animation: forecastInfoExit 700ms;
+}
+.reveal-icon {
+  visibility: visible !important;
+  animation: forecastIconEntrance 1000ms;
+}
+.hide-icon {
+  visibility: visible !important;
+  animation: forecastIconExit 700ms;
+}
+
+@keyframes forecastInfoEntrance {
+  0% {
+    transform: translate3d(-70%, 0, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes forecastInfoExit {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(70%, 0, 0);
+    opacity: 0;
+  }
+}
+@keyframes forecastIconEntrance {
+  0% {
+    transform: translate3d(0, 25%, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes forecastIconExit {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, -15%, 0);
+    opacity: 0;
+  }
+}
+@media (max-width: 1024px) {
+  .background {
+    height: 100vh;
+    width: auto;
+  }
+}
+@media (max-width: 640px) {
+  .forecasts {
+    width: 100vw !important;
+  }
+  .forecast {
+    padding: 10px;
+    svg {
+      height: 30px;
+      width: 30px;
+    }
+  }
+  .search-wrap {
+    width: 90vw;
+  }
+  input {
+    font-size: 20px !important;
+  }
+  .location-info {
+    width: 100vw;
+  }
+}
