@@ -9,7 +9,12 @@ import { useState } from "react";
 function App() {
   const { isSearching, icon } = useSelector((state) => state.info);
   const [weatherBackground, setWeatherBackground] = useState(defaultBackground);
-
+  useEffect(() => {
+    Object.values(backgrounds).forEach((background) => {
+      const img = new Image();
+      img.src = background;
+    });
+  }, []);
   useEffect(() => {
     if (icon !== "") {
       setWeatherBackground(backgrounds[icon.substring(0, icon.length - 1)]);
