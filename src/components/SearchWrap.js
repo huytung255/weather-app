@@ -2,11 +2,11 @@ import React from "react";
 import { IoLocationSharp } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { setSearchResults, setIsSearching } from "../redux/info";
-import axiosClient from "../api/axiosClient";
 import { GoSearch } from "react-icons/go";
 import { useState } from "react";
 import { Box } from "@material-ui/core";
 import { CircularProgress } from "@material-ui/core";
+import mockWeatherApi from "../api/mockWeatherApi";
 const SearchWrap = () => {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
@@ -15,22 +15,12 @@ const SearchWrap = () => {
     e.preventDefault();
     setIsFetching(true);
     try {
-      const searchRes = await axiosClient.get("weather", {
-        params: {
-          q: city,
-        },
-      });
+      const searchRes = await mockWeatherApi.getWeatherByCity(city);
       const { name, dt, timezone } = searchRes.data;
       const temp = searchRes.data.main.temp;
       const { description, icon } = searchRes.data.weather[0];
       const { lat, lon } = searchRes.data.coord;
-      const infoRes = await axiosClient.get("onecall", {
-        params: {
-          lat: lat,
-          lon: lon,
-          exclude: "minutely,alerts,current",
-        },
-      });
+      const infoRes = await mockWeatherApi.getOneCall({ lat, lon });
       const daily = [];
       for (let i = 1; i <= 6; i++) {
         const { timezone_offset } = infoRes.data;
