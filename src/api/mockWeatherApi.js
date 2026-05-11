@@ -58,10 +58,6 @@ const WEATHER_TYPES = [
   },
 ];
 
-function clamp(n, min, max) {
-  return Math.max(min, Math.min(max, n));
-}
-
 function hashString(str) {
   // small deterministic hash
   let h = 2166136261;
@@ -118,7 +114,9 @@ function createDaily(dtStart, timezoneOffsetSeconds, weatherType) {
     arr.push({
       dt: dayDt,
       temp: { max, min },
-      weather: [{ description: weatherType.description, icon: weatherType.icon }],
+      weather: [
+        { description: weatherType.description, icon: weatherType.icon },
+      ],
     });
   }
   return { timezone_offset: timezoneOffsetSeconds, daily: arr };
@@ -132,7 +130,9 @@ function createHourly(dtStart, timezoneOffsetSeconds, weatherType) {
     arr.push({
       dt,
       temp,
-      weather: [{ description: weatherType.description, icon: weatherType.icon }],
+      weather: [
+        { description: weatherType.description, icon: weatherType.icon },
+      ],
     });
   }
   return { timezone_offset: timezoneOffsetSeconds, hourly: arr };
@@ -156,7 +156,7 @@ const mockWeatherApi = {
     const lat = ((h % 180000) / 1000 - 90).toFixed(4);
     const lon = (((h / 180000) % 360000) / 1000 - 180).toFixed(4);
 
-    const tempJitter = ((h % 600) / 100) - 3; // -3..+3
+    const tempJitter = (h % 600) / 100 - 3; // -3..+3
     const temp = weatherType.baseTempK + tempJitter;
 
     return asAxiosResponse({
@@ -164,7 +164,9 @@ const mockWeatherApi = {
       dt,
       timezone,
       main: { temp },
-      weather: [{ description: weatherType.description, icon: weatherType.icon }],
+      weather: [
+        { description: weatherType.description, icon: weatherType.icon },
+      ],
       coord: { lat: Number(lat), lon: Number(lon) },
     });
   },
