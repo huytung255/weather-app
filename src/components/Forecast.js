@@ -26,6 +26,7 @@ const Forecast = ({ delay, option, forecastInfo }) => {
     return () => {
       clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (isEntrance) return;
@@ -43,6 +44,7 @@ const Forecast = ({ delay, option, forecastInfo }) => {
     return () => {
       clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option]);
   return (
     <div style={{ animationDuration: `${delay + 800}ms` }} className="forecast">
